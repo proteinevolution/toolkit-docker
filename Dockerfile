@@ -38,5 +38,9 @@ RUN curl -fsL http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.m
 VOLUME /app
 WORKDIR /app
 
+# expose frontend port
+EXPOSE 8080
+# expose backend port
 EXPOSE 1234
+
 CMD sbt "run 1234"
