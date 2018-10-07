@@ -13,6 +13,8 @@ RUN apt-get update -qqy && apt-get -qqyy install \
 ENV MAXMIND_DB "/root/GeoLite2-City.mmdb"
 ENV TK_BASE_PATH "/root/Toolkit"
 
+ENV CHOKIDAR_USEPOLLING=true
+
 WORKDIR /root
 RUN mkdir -p $TK_BASE_PATH/development
 RUN mkdir -p $TK_BASE_PATH/bioprogs
