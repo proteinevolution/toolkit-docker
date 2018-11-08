@@ -1,6 +1,6 @@
-FROM hseeberger/scala-sbt:8u181_2.12.7_1.2.3
+FROM hseeberger/scala-sbt:11.0.1_2.12.7_1.2.6
 
-LABEL maintainer="fgabler@tue.mpg.de" version="1.1.0"
+LABEL maintainer="fgabler@tue.mpg.de"
 
 # since scala-sbt is based on stretch-scm instead of stretch, install missing packages. see: https://github.com/docker-library/buildpack-deps/blob/d7da72aaf3bb93fecf5fcb7c6ff154cb0c55d1d1/stretch/Dockerfile
 RUN apt-get update && apt-get install -y --no-install-recommends \
