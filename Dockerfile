@@ -73,8 +73,8 @@ RUN \
 # Download maxmind geoip data
 RUN curl -fsL http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz | gunzip -c > $MAXMIND_DB
 
-VOLUME /app
-WORKDIR /app
+VOLUME /toolkit
+WORKDIR /toolkit
 
 # expose frontend port
 EXPOSE 8080
