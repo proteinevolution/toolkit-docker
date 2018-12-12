@@ -48,25 +48,47 @@ RUN apt-get update -qqy && apt-get -qqyy install \
     yarn \
   && rm -rf /var/lib/apt/lists/*
 
-ENV MAXMIND_DB "/root/GeoLite2-City.mmdb"
 ENV TK_BASE_PATH "/root/Toolkit"
+ENV MAXMIND_DB "$TK_BASE_PATH/data/GeoLite2-City.mmdb"
 
 ENV CHOKIDAR_USEPOLLING=true
 
-WORKDIR /root
-RUN mkdir -p $TK_BASE_PATH/development
-RUN mkdir -p $TK_BASE_PATH/bioprogs
+RUN mkdir -p $TK_BASE_PATH/bioprogs/tools
 RUN mkdir -p $TK_BASE_PATH/databases
+RUN mkdir -p $TK_BASE_PATH/data
+# install some tools
+WORKDIR $TK_BASE_PATH/bioprogs/tools
+# CLUSTALO
+RUN mkdir -p clustalo/bin && \
+    wget http://www.clustal.org/omega/clustalo-1.2.4-Ubuntu-x86_64 -O clustalo/bin/clustalo && \
+    chmod u+x clustalo/bin/clustalo
+# PSIBLAST
+RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz -O blastplus.tar.gz && \
+    mkdir blastplus && \
+    tar xvfz blastplus.tar.gz -C blastplus --strip-components 1 && \
+    rm blastplus.tar.gz
+# KALIGN
+RUN wget http://ftp.debian.org/debian/pool/main/k/kalign/kalign_2.03+20110620.orig.tar.gz -O kalign.tar.gz && \
+    mkdir kalign && \
+    tar xvfz kalign.tar.gz -C kalign && \
+    rm kalign.tar.gz && \
+    cd kalign && \
+    ./configure && \
+    make && \
+    # make install && \ # this would make it globally available
+    cd ..
 
+# install some databases
+
+
+WORKDIR /root
 # Install custom maxmind geoip
-RUN \
-    git clone https://github.com/felixgabler/maxmind-geoip2-scala.git && \
+RUN git clone https://github.com/felixgabler/maxmind-geoip2-scala.git && \
     cd maxmind-geoip2-scala && \
     sbt publishLocal
 
 # Install custom scalajs mithril
-RUN \
-    git clone https://github.com/zy4/scalajs-mithril.git && \
+RUN git clone https://github.com/zy4/scalajs-mithril.git && \
     cd scalajs-mithril && \
     sbt publishLocal
 
