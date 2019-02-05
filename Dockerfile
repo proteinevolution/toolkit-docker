@@ -63,7 +63,7 @@ RUN mkdir -p clustalo/bin && \
     wget http://www.clustal.org/omega/clustalo-1.2.4-Ubuntu-x86_64 -O clustalo/bin/clustalo && \
     chmod u+x clustalo/bin/clustalo
 # PSIBLAST
-RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz -O blastplus.tar.gz && \
+RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.8.1/ncbi-blast-2.8.1+-x64-linux.tar.gz -O blastplus.tar.gz && \
     mkdir blastplus && \
     tar xvfz blastplus.tar.gz -C blastplus --strip-components 1 && \
     rm blastplus.tar.gz
