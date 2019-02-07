@@ -103,4 +103,4 @@ EXPOSE 8080
 # expose backend port
 EXPOSE 1234
 
-CMD sbt "run 1234"
+CMD sbt shell
