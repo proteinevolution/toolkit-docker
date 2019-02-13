@@ -98,6 +98,8 @@ RUN curl -fsL http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.m
 VOLUME /toolkit
 WORKDIR /toolkit
 
+RUN sbt update
+
 # expose frontend port
 EXPOSE 8080
 # expose backend port
