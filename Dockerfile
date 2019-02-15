@@ -105,4 +105,8 @@ EXPOSE 8080
 # expose backend port
 EXPOSE 1234
 
-CMD sbt shell
+RUN mv ~/.ivy2 ~/.ivy_image
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["shell"]
