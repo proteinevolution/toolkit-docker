@@ -61,7 +61,7 @@ WORKDIR /toolkit/backend
 RUN sbt update
 
 # expose backend port
-EXPOSE 1234
+EXPOSE 9000
 
 RUN mv ~/.ivy2 ~/.ivy_image
 COPY ./docker-entrypoint.sh /
