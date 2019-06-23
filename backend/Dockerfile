@@ -1,4 +1,4 @@
-FROM hseeberger/scala-sbt:8u212_2.12.8_1.2.8
+FROM hseeberger/scala-sbt:8u212_2.13.0_1.2.8
 
 LABEL maintainer="fgabler@tue.mpg.de"
 
@@ -8,6 +8,14 @@ ENV MAXMIND_DB "$TK_BASE_PATH/data/GeoLite2-City.mmdb"
 RUN mkdir -p $TK_BASE_PATH/bioprogs/tools
 RUN mkdir -p $TK_BASE_PATH/databases
 RUN mkdir -p $TK_BASE_PATH/data
+
+# install build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libc6-dev \
+    gcc \
+    make \
+	&& rm -rf /var/lib/apt/lists/*
+
 # install some tools
 WORKDIR $TK_BASE_PATH/bioprogs/tools
 # CLUSTALO
@@ -47,8 +55,8 @@ RUN git clone https://github.com/zy4/scalajs-mithril.git && \
 # Download maxmind geoip data
 RUN curl -fsL http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz | gunzip -c > $MAXMIND_DB
 
-VOLUME /toolkit
-WORKDIR /toolkit
+VOLUME /toolkit/backend
+WORKDIR /toolkit/backend
 
 RUN sbt update
 
@@ -56,7 +64,7 @@ RUN sbt update
 EXPOSE 1234
 
 RUN mv ~/.ivy2 ~/.ivy_image
-COPY ../docker-entrypoint.sh /
+COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["shell"]

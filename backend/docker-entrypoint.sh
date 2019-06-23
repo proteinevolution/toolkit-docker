@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Make sure this file does not contain Windows CRLF line endings.
+
 # The only point of that entrypoint file is to merge `ivy2_image/local` (where sbt libraries built in Dockerfile.backend reside)
 # into `/root/.ivy2/local`. `.ivy2/local` is where image user could mount his host ivy cache
 # IMPORTANT: always use LF line endings for this file
