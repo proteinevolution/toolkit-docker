@@ -62,7 +62,7 @@ EXPOSE 9000
 
 RUN mv ~/.ivy2 ~/.ivy_image
 COPY ./docker-entrypoint.sh /
-RUN chmod +x ./docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["shell"]
