@@ -1,8 +1,8 @@
-FROM node:10.16
+FROM node:14.7
 
 LABEL maintainer="fgabler@tue.mpg.de"
 
-RUN yarn global add yarn@1.16.0
+RUN yarn global add yarn@1.22.4
 RUN yarn global add @vue/cli npm-check-updates
 
 ENV CHOKIDAR_USEPOLLING=true

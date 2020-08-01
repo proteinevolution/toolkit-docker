@@ -1,4 +1,4 @@
-FROM hseeberger/scala-sbt:8u212_2.13.0_1.2.8
+FROM hseeberger/scala-sbt:8u252_1.3.13_2.12.11
 
 LABEL maintainer="fgabler@tue.mpg.de"
 
@@ -45,11 +45,6 @@ WORKDIR /root
 # Install custom maxmind geoip
 RUN git clone https://github.com/felixgabler/maxmind-geoip2-scala.git && \
     cd maxmind-geoip2-scala && \
-    sbt publishLocal
-
-# Install custom scalajs mithril
-RUN git clone https://github.com/zy4/scalajs-mithril.git && \
-    cd scalajs-mithril && \
     sbt publishLocal
 
 # Download maxmind geoip data
