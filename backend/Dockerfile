@@ -3,8 +3,7 @@ FROM hseeberger/scala-sbt:8u252_1.3.13_2.12.11
 LABEL maintainer="fgabler@tue.mpg.de"
 
 ENV TK_BASE_PATH "/root/Toolkit"
-# remove this before VC !!!!!!!!!!!!!
-ENV MAXMIND_LICENSE ""
+ARG MAXMIND_LICENSE
 ENV MAXMIND_DB "$TK_BASE_PATH/data/GeoLite2-City.mmdb"
 
 RUN mkdir -p $TK_BASE_PATH/bioprogs/tools
@@ -50,7 +49,7 @@ RUN git clone https://github.com/felixgabler/maxmind-geoip2-scala.git && \
     sbt publishLocal
 
 # Download maxmind geoip data
-RUN curl https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE&suffix=tar.gz | tar xvz -C $MAXMIND_DB
+RUN curl "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE&suffix=tar.gz" | tar xvz --strip-components=1 -C "$TK_BASE_PATH/data/"
 
 VOLUME /toolkit/backend
 WORKDIR /toolkit/backend

@@ -1,5 +1,5 @@
 # Toolkit Frontend Docker Image
-Dockerfile for the toolkit's frontend docker image. It should be built automatically by DockerCloud.
+Dockerfile for the toolkit's frontend docker image. It should be built automatically by DockerHub.
 
 To build it manually, run:\
 ``docker image build -t "proteinevolution/toolkit-docker-frontend:1.3.0" -t "proteinevolution/toolkit-docker-frontend:latest" .``
