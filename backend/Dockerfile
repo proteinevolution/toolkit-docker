@@ -1,4 +1,4 @@
-FROM hseeberger/scala-sbt:8u252_1.3.13_2.12.11
+FROM hseeberger/scala-sbt:8u252_1.3.13_2.13.3
 
 LABEL maintainer="fgabler@tue.mpg.de"
 
